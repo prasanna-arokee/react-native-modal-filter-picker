@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Modal, View, ListView, TouchableOpacity, Text, TextInput } from 'react-native'
-
-
+import { Modal, View, ListView, Dimensions,TouchableOpacity, ActivityIndicator,Text, TextInput } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+const { width } = Dimensions.get('window');
+const {height} =Dimensions.get('window')
 import styles from './styles'
 
 
@@ -50,6 +51,7 @@ export default class ModalFilterPicker extends Component {
         {...modal}
         visible={visible}
         supportedOrientations={['portrait', 'landscape']}
+        style={{width}}
       >
         <View style={overlayStyle || styles.overlay}>
           {renderedTitle}
@@ -71,21 +73,51 @@ export default class ModalFilterPicker extends Component {
       placeholderText,
       placeholderTextColor,
       filterTextInputContainerStyle,
+      cancelButtonStyle,
+      cancelButtonTextStyle,
+      cancelButtonText,
       filterTextInputStyle
     } = this.props
 
+  
+
     const filter = (!showFilter) ? null : (
       <View style={filterTextInputContainerStyle || styles.filterTextInputContainer}>
-        <TextInput
-          onChangeText={this.onFilterChange}
-          autoCorrect={false}
-          blurOnSubmit={true}
-          autoFocus={autoFocus}
-          autoCapitalize="none"
-          underlineColorAndroid={androidUnderlineColor}
-          placeholderTextColor={placeholderTextColor}
-          placeholder={placeholderText}
-          style={filterTextInputStyle || styles.filterTextInput} />
+
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:20,marginVertical:10,width:'100%'}}>
+          <View style={{justifyContent:'center',width:'8%'}}>
+          <Icon
+                        name="search"
+                        size={25}
+                        style={{  }}
+                      />
+                      </View>
+              <View style={{width:'75%'}}>
+             
+              <TextInput
+                    onChangeText={this.onFilterChange}
+                    autoCorrect={false}
+                    blurOnSubmit={true}
+                    autoFocus={autoFocus}
+                    autoCapitalize="none"
+                    underlineColorAndroid={androidUnderlineColor}
+                    placeholderTextColor={placeholderTextColor}
+                    placeholder={placeholderText}
+                    style={filterTextInputStyle || styles.filterTextInput} 
+                />
+              </View>
+                
+              <View style={{justifyContent:'center',width:'17%'}}>
+                <TouchableOpacity onPress={this.props.onCancel}
+                  activeOpacity={0.7}
+                  style={cancelButtonStyle || styles.cancelButton}
+                >
+                <Icon name="close" style={cancelButtonTextStyle || styles.cancelButtonText} size={30} color="black" />
+                </TouchableOpacity>
+                </View>
+              
+          </View>
+      
       </View>
     )
 
@@ -114,7 +146,15 @@ export default class ModalFilterPicker extends Component {
           dataSource={ds.cloneWithRows([{ key: '_none' }])}
           renderRow={() => (
             <View style={styles.noResults}>
-              <Text style={styles.noResultsText}>{noResultsText}</Text>
+
+              <Text style={styles.noResultsText}>
+              
+              {noResultsText}
+              </Text>
+              <ActivityIndicator  
+              // animating = {props.options}
+              style = {styles.activityIndicator} size = "large"
+              />
             </View>
           )}
         />
@@ -136,7 +176,7 @@ export default class ModalFilterPicker extends Component {
     const {
       selectedOption,
       renderOption,
-      optionTextStyle,
+        optionTextStyle,
       selectedOptionTextStyle
     } = this.props
 
@@ -171,14 +211,14 @@ export default class ModalFilterPicker extends Component {
       cancelButtonText
     } = this.props
 
-    return (
-      <TouchableOpacity onPress={this.props.onCancel}
-        activeOpacity={0.7}
-        style={cancelButtonStyle || styles.cancelButton}
-      >
-        <Text style={cancelButtonTextStyle || styles.cancelButtonText}>{cancelButtonText}</Text>
-      </TouchableOpacity>
-    )
+    // return (
+    //   <TouchableOpacity onPress={this.props.onCancel}
+    //     activeOpacity={0.7}
+    //     style={cancelButtonStyle || styles.cancelButton}
+    //   >
+    //     <Text style={cancelButtonTextStyle || styles.cancelButtonText}>{cancelButtonText}</Text>
+    //   </TouchableOpacity>
+    // )
   }
 
   onFilterChange = (text) => {
@@ -233,11 +273,11 @@ ModalFilterPicker.propTypes = {
 }
 
 ModalFilterPicker.defaultProps = {
-  placeholderText: 'Filter...',
-  placeholderTextColor: '#ccc',
-  androidUnderlineColor: 'rgba(0,0,0,0)',
+  placeholderText: '',
+  placeholderTextColor: '#000000',
+  androidUnderlineColor: '#ffffff',
   cancelButtonText: 'Cancel',
-  noResultsText: 'No matches',
+  noResultsText: 'No data',
   visible: true,
   showFilter: true,
   keyboardShouldPersistTaps: 'never'
