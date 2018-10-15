@@ -7,17 +7,17 @@ const optionStyle = {
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
-  paddingVertical: 10,
-  paddingHorizontal: 10,
   borderBottomWidth: 1,
-  borderBottomColor: '#eee'
+  borderBottomColor: '#eee',
+  paddingVertical: 20,
+  // paddingHorizontal: 15,
 }
 
 const optionTextStyle = {
   flex: 1,
   textAlign: 'left',
-  color: '#000',
-  fontSize: 22
+  color: '#000000',
+  fontSize: 15,
 }
 
 export default StyleSheet.create({
@@ -28,8 +28,10 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0,0,0,0.85)',
-    justifyContent: 'center',
-    alignItems: 'center'
+    // justifyContent: 'center',
+    // alignItems: 'center'
+    width,
+    height
   },
   titleTextStyle: {
     flex: 0,
@@ -39,8 +41,8 @@ export default StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    width: width * 0.8,
-    maxHeight: height * 0.7,
+    width,
+    height,
     backgroundColor: '#fff',
     borderRadius: 0,
     marginBottom: 15
@@ -53,24 +55,31 @@ export default StyleSheet.create({
   },
   cancelButton: {
     flex: 0,
-    backgroundColor: '#999',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10
+    backgroundColor: 'transparent',
+    // paddingVertical: 10,
+    // paddingHorizontal: 20,
+    borderRadius: 10,
+    // justifyContent:'center',
+    // alignItems: 'center',
   },
   cancelButtonText: {
-    textAlign: 'center',
-    fontSize: 18
+    // textAlign: 'center',
+    // fontSize: 18,
+    // backgroundColor:'white',
+    // marginLeft: 15,
   },
   filterTextInputContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#999'
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#999'
   },
   filterTextInput: {
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingVertical: 12,
     flex: 0,
-    height: 50
+    height: 40,
+    // borderColor:'#E9E9E9',
+    // borderWidth:1,   
+    // width:'75%',
+    borderRadius:8,
   },
   categoryStyle: {
     ...optionStyle
@@ -79,26 +88,33 @@ export default StyleSheet.create({
     ...optionTextStyle,
     color: '#999',
     fontStyle: 'italic',
-    fontSize: 16
+    fontSize: 16,
+    // marginHorizontal: 10,
   },
   optionStyle: {
-    ...optionStyle
+    ...optionStyle,
+    marginHorizontal: 20,
   },
   optionStyleLastChild: {
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
+    
   },
   optionTextStyle: {
-    ...optionTextStyle
+    ...optionTextStyle,
+    
   },
   selectedOptionStyle: {
-    ...optionStyle
+    ...optionStyle,
+    
   },
   selectedOptionStyleLastChild: {
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
+    
   },
   selectedOptionTextStyle: {
     ...optionTextStyle,
-    fontWeight: '700'
+    fontWeight: '700',
+    
   },
   noResults: {
     flex: 0,
