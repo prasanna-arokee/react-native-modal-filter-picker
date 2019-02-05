@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
-
+import { ifIphoneX } from 'react-native-iphone-x-helper'
 const { width, height } = Dimensions.get('window')
 
 const optionStyle = {
@@ -27,11 +27,16 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.85)',
+    backgroundColor: '#fff',
     // justifyContent: 'center',
     // alignItems: 'center'
     width,
-    height
+    height,
+    ...ifIphoneX({
+      paddingTop: 50
+  }, {
+      paddingTop: 0
+  })
   },
   titleTextStyle: {
     flex: 0,
